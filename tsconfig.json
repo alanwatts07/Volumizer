@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {       // Enable all strict type-checking options
+      "esModuleInterop": true,
+      "target": "ES2020",
+      "moduleResolution": "node" // Enables ES6-compatible imports for commonjs syntax
+    }
+  }

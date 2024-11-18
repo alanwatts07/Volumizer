@@ -1,0 +1,31 @@
+{
+  "name": "volumizer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "looper.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alanwatts07/Volumizer.git"
+  },
+  "keywords": [
+    "volume",
+    "bot"
+  ],
+  "author": "alan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alanwatts07/Volumizer/issues"
+  },
+  "homepage": "https://github.com/alanwatts07/Volumizer#readme",
+  "dependencies": {
+    "@solana/web3.js": "^1.68.0",
+    "@wen-moon-ser/moonshot-sdk": "^4.0.1-alpha-0.0.10",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.4",
+    "@coral-xyz/anchor": "^0.29.0",
+    "@heliofi/launchpad-common": "1.1.2"
+  }
+}

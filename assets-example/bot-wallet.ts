@@ -1,0 +1,1 @@
+export const KEYCODE = new Uint8Array([0,0,yourkey,0,0,0])

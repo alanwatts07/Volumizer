@@ -68,7 +68,7 @@ export const sellIx = async (mintAddress): Promise<string> => {
   });
 
   const priorityIx = ComputeBudgetProgram.setComputeUnitPrice({
-    microLamports: 400_000,
+    microLamports: 100_000,
   });
 
   const blockhash = await connection.getLatestBlockhash('confirmed');

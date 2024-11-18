@@ -10,7 +10,7 @@ dotenv.config();
 ```
 
 ### Imports
-- **`buyIx` from `./buy-bot-looper` and `sellIx` from `./sell-bot`**: Functions to execute buying and selling of tokens.
+- **`buyIx` from `./utils/buy-bot-looper` and `sellIx` from `./utils/sell-bot`**: Functions to execute buying and selling of tokens.
 - **`dotenv`**: Loads environment variables from a `.env` file.
 - **`@solana/web3.js`**: Used to interact with the Solana blockchain.
 

@@ -101,17 +101,18 @@ const main = async () => {
 
         // Read transactions from the JSON file
         const transactions = readTransactions(filePath);
+        const signedTransactions = transactions
 
-        // Get a recent blockhash for signing transactions
+         // Get a recent blockhash for signing transactions
         const recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
-
+/*
         // Sign transactions
         const signedTransactions = [];
         for (const serializedTx of transactions) {
             const signedTx = await signTransaction(serializedTx, keypair, recentBlockhash);
             signedTransactions.push(signedTx);
         }
-        console.log('Signed Transactions:', signedTransactions);
+        console.log('Signed Transactions:', signedTransactions); */
 
         // Add the tip transaction as the last transaction in the bundle
         const finalTransactions = addTipTransaction(signedTransactions, recentBlockhash);

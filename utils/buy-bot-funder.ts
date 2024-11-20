@@ -135,12 +135,12 @@ export const buyIx = async (mintAddress): Promise<string> => {
     const txHash = await connection.sendTransaction(transaction, {
       skipPreflight: false,
       maxRetries: 0,
-      preflightCommitment: 'confirmed',
+      preflightCommitment: 'processed',
     });
     console.log('Buy Transaction Hash:', txHash);
  
 
-   /* console.log('confirming transaction...');
+   console.log('confirming transaction...');
   const confirmationResult = await connection.confirmTransaction(
     {
       signature: txHash,
@@ -155,7 +155,7 @@ export const buyIx = async (mintAddress): Promise<string> => {
     throw new Error(`Transaction failed: ${confirmationResult.value.err}`);
   }
 
-  console.log('Transaction confirmed successfully:', txHash); */
+  console.log('Transaction confirmed successfully:', txHash);
   return txHash;
 } catch (error) {
   console.error('Error during buyIx:', error);

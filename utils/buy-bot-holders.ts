@@ -27,7 +27,7 @@ dotenv.config();
 
 const keysDirectory = './utils/keys/keys1';
 const transactionsFilePath = './assets/transactions2.json';
-const TIP_ACCOUNT = "Cw8CFyM9FkoMi7K7Crf6HNQqf4uEMzpKw6QNghXLvLkY";
+const TIP_ACCOUNT = "96gYZGLnJYVFmbjzopPSU6QiEV5fGqZNyN9nmNhvrZU5";
 
 /**
  * Loads a specified number of keypairs from the given directory.

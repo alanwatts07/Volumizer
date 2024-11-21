@@ -1,17 +1,19 @@
 import { Connection, SystemProgram, TransactionMessage, VersionedTransaction, PublicKey, Keypair } from '@solana/web3.js';
-import fs from 'fs';
+const fs = require('fs');
 import fetch from 'node-fetch';
 import bs58 from 'bs58';
 import { KEYCODE } from '../assets/bot-wallet';
 import { exec } from 'child_process';
+const dotenv = require('dotenv');
 
+dotenv.config()
 
 
 const TIP_ACCOUNT = "96gYZGLnJYVFmbjzopPSU6QiEV5fGqZNyN9nmNhvrZU5";
 const filePath = './assets/transactions2.json';
 const url = "https://mainnet.block-engine.jito.wtf/api/v1/bundles"; // Jito API endpoint
 const mainSigner = Keypair.fromSecretKey(new Uint8Array(KEYCODE));
-
+const RPC_URL = process.env.RPC_URL;
 // Utility function to delay
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -119,21 +121,26 @@ const mainWithRetry = async (bundleId: string) => {
 };
 
 // Main function to process transactions and check bundle status
+// Main function to process transactions and check bundle status
 const main = async () => {
-    const connection = new Connection('https://api.mainnet-beta.solana.com', 'confirmed');
+    const connection = new Connection(RPC_URL, 'confirmed');
     const recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+    console.log("Recent Blockhash:", recentBlockhash);
 
-    // Read the first 4 transactions and create the 5th as a tip transaction
+    // Read the first 5 transactions from the file
     const signedTransactions = readTransactions(filePath);
 
-    // Create and add the tip transaction
-    
+    if (signedTransactions.length === 0) {
+        console.error("No valid transactions to bundle.");
+        return;
+    }
 
     // Output final transactions for bundling
     console.log("Final signed transactions for bundling:", signedTransactions);
 
     // Send the bundle to Jito's Block Engine and check the status
     try {
+        console.log(signedTransactions[0]);
         const response = await sendBundleToJito(signedTransactions);
         const bundleId = response;
         console.log("Bundle submitted. Bundle ID:", response);
@@ -151,7 +158,6 @@ const main = async () => {
             }
             console.log(`Script output: ${stdout}`);
         });
-
     }
 };
 

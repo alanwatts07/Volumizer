@@ -34,7 +34,7 @@ const transactionsFilePath = './assets/transactions.json';
 
 export async function generateKeypairsAndTransactions(count) {
     const rawTransactions = [];
-    const fundingWalletBalance = await connection.getBalance(fundingWallet.publicKey);
+    let fundingWalletBalance = await connection.getBalance(fundingWallet.publicKey);
 
     for (let i = 0; i < count; i++) {
         const keypair = Keypair.generate();
@@ -48,9 +48,15 @@ export async function generateKeypairsAndTransactions(count) {
         fs.writeFileSync(path.join(keysDirectory, `${publicKey}.json`), secretKeyJson);
         fs.writeFileSync(path.join(keysDirectory1, `${publicKey}.json`), secretKeyJson);
 
-        const rawTransaction = await createRawTransaction(keypair, fundingWalletBalance);
+        const { rawtx: rawTransaction, lamportsToSend } = await createRawTransaction(keypair, fundingWalletBalance);
+        if (rawTransaction && rawTransaction !== '') {
         rawTransactions.push({ tx: rawTransaction });
+    }
         console.log(`Raw transaction for wallet ${publicKey}:`, rawTransaction);
+
+        // Subtract the sent amount from the funding wallet balance
+        const sentAmount = lamportsToSend;
+        fundingWalletBalance -= sentAmount;
     }
 
     // Save all raw transactions to a JSON file
@@ -59,7 +65,7 @@ export async function generateKeypairsAndTransactions(count) {
 }
 
 async function createRawTransaction(newWallet, fundingWalletBalance) {
-    const randomPercentage = Math.random() * (25 - 20) + 20;
+    const randomPercentage = Math.random() * (8 - 5) + 5;
     
     const lamportsToSend = Math.floor((fundingWalletBalance * randomPercentage) / 100);
 
@@ -82,8 +88,10 @@ async function createRawTransaction(newWallet, fundingWalletBalance) {
     transaction.partialSign(fundingWallet);
 
     // Serialize and return as base64 for saving
-    return transaction.serialize().toString('base64');
+    const rawtx = transaction.serialize().toString('base64');
+    return { rawtx, lamportsToSend };
 }
+
 
 // Generate 5 new keypairs and output raw transactions
 generateKeypairsAndTransactions(4);

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { Connection, Transaction, PublicKey, Keypair, SystemProgram } from '@solana/web3.js';
+import { Connection, Transaction, PublicKey, Keypair, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import fetch from 'node-fetch';
 import bs58 from 'bs58';
 import { KEYCODE } from '../assets/bot-wallet';
@@ -84,7 +84,7 @@ const addTipToLastTransaction = async (transactions, recentBlockhash) => {
         SystemProgram.transfer({
             fromPubkey: keypair.publicKey,
             toPubkey: new PublicKey(TIP_ACCOUNT),
-            lamports: 450000 // Set the desired tip amount
+            lamports: 0.0001 * LAMPORTS_PER_SOL// Set the desired tip amount
         })
     );
 

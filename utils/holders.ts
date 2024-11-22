@@ -1,8 +1,8 @@
-import { generateKeypairAndTransaction } from "./createHolders";
+import { generateKeypairsAndTransactions} from "./createHolders";
 
 
 (async () => {
-    const tx = await generateKeypairAndTransaction();
+    const tx = await generateKeypairsAndTransactions(5);
     console.log(tx);
 })();
 

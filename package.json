@@ -21,11 +21,12 @@
   },
   "homepage": "https://github.com/alanwatts07/Volumizer#readme",
   "dependencies": {
+    "@coral-xyz/anchor": "^0.29.0",
+    "@heliofi/launchpad-common": "1.1.2",
     "@solana/web3.js": "^1.68.0",
     "@wen-moon-ser/moonshot-sdk": "^4.0.1-alpha-0.0.10",
     "dotenv": "^16.4.5",
     "ethers": "^6.13.4",
-    "@coral-xyz/anchor": "^0.29.0",
-    "@heliofi/launchpad-common": "1.1.2"
+    "jito-js-rpc": "^0.1.0"
   }
 }

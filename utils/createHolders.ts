@@ -59,7 +59,8 @@ export async function generateKeypairsAndTransactions(count) {
 }
 
 async function createRawTransaction(newWallet, fundingWalletBalance) {
-    const randomPercentage = Math.random() * (15 - 10) + 1;
+    const randomPercentage = Math.random() * (25 - 20) + 20;
+    
     const lamportsToSend = Math.floor((fundingWalletBalance * randomPercentage) / 100);
 
     const transaction = new Transaction().add(

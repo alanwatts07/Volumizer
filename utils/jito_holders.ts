@@ -272,7 +272,7 @@ if (balanceLamports < rentExemptionAmount) {
     microLamports: 1_000,
   });
 
-  instructions.push(priorityIx, ...ixs);
+  instructions.push(...ixs);
 
   // Log detailed instruction information before constructing the message
   console.log(`Total Instructions in Buy Transaction: ${instructions.length}`);
@@ -342,7 +342,7 @@ async function prepareTipTransaction(
   console.log('--- Preparing Tip Transaction (Versioned) ---');
 
   // Define the tip amount in lamports (e.g., 0.00156 SOL)
-  const tipAmountLamports = 0.000106 * LAMPORTS_PER_SOL; // Adjust as needed
+  const tipAmountLamports = 0.000206 * LAMPORTS_PER_SOL; // Adjust as needed
 
   // Ensure the main signer has sufficient balance
   const mainSignerBalance = await connection.getBalance(
@@ -710,7 +710,7 @@ async function main() {
 
     // Initial status checking after submission
     let attempts1 = 0;
-    const maxAttempts1 = 3;
+    const maxAttempts1 = 1;
     while (attempts1 < maxAttempts1) {
       // Check the status of the submitted bundle
       console.log('--- Checking Submitted Bundle Status (Inflight) ---');
@@ -731,7 +731,7 @@ async function main() {
         );
       }
       attempts1++;
-      await delay(15000); // Wait 5 seconds before retrying
+      await delay(5000); // Wait 5 seconds before retrying
     }
     if (attempts1 === maxAttempts1) {
       console.error(
@@ -741,7 +741,7 @@ async function main() {
 
     // Check bundle status with retry mechanism
     let attempts = 0;
-    const maxAttempts = 3;
+    const maxAttempts = 1;
     while (attempts < maxAttempts) {
       console.log('--- Checking Bundle Status ---');
       try {
@@ -760,7 +760,7 @@ async function main() {
         );
       }
       attempts++;
-      await delay(15000); // Wait 5 seconds before retrying
+      await delay(5000); // Wait 5 seconds before retrying
     }
 
     if (attempts === maxAttempts) {

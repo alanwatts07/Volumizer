@@ -25,20 +25,20 @@ def spinner_message(message, spinner='dots', color='yellow', duration=7):
     spinner.start()
     time.sleep(duration)
     spinner.succeed()
-scrolling_text("Welcome to Jito-Bot v1.0.0", delay=0.1, color='green')
+scrolling_text("Welcome to Jito-Bot v1.0.0", delay=0.031, color='green')
 
 # Asking if the user wants Holder Mode
-scrolling_text("Do you want to enable Holder Mode? (y/n(enter recovery mode))", delay=0.1, color='cyan')
+scrolling_text("Do you want to enable Holder Mode? (y/n(enter recovery mode))", delay=0.031, color='cyan')
 response = input().strip().lower()
 
 if response == 'y':
     # Asking if the user wants to fund new
-    scrolling_text("Do you want to fund new holders? (y/n) 'y' will spend approx 20 percent of your bot wallet to fund 4 new wallets at default", delay=0.1, color='yellow')
+    scrolling_text("Do you want to fund new holders? (y/n) 'y' will spend approx 20 percent of your bot wallet to fund 4 new wallets at default", delay=0.031, color='yellow')
     fund_response = input().strip().lower()
 
     if fund_response == 'y':
         # Welcome message with scrolling text
-        scrolling_text("Welcome to Jito-Bot Holder mode", delay=0.1, color='green')
+        scrolling_text("Welcome to Jito-Bot Holder mode", delay=0.031, color='green')
         time.sleep(1)
 
         # Sequence of subprocesses with colorful loading effects

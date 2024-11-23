@@ -266,7 +266,7 @@ for (const creator of creators) {
     });
 
     const priorityIx = ComputeBudgetProgram.setComputeUnitPrice({
-      microLamports: 100_000,
+      microLamports: 150_000,
     });
 
     // Obtain a new blockhash before signing and sending the transaction

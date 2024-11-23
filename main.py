@@ -85,10 +85,32 @@ if response == 'y':
         scrolling_text("Invalid response. Please run the script again and enter 'y' or 'n'.", delay=0.1, color='red')
 
 elif response == 'n':
-    # Run another script if Holder Mode is not enabled
-    spinner_message("Running Sol Recovery process...", spinner='dots', color='blue', duration=3)
-    subprocess.run(["ts-node", "de-funder.ts"])
-    scrolling_text("recovery  script executed!", delay=0.08, color='yellow')
+    # Asking if the user wants Funder Mode
+    scrolling_text("Do you want to enable Funder Mode? (y/n(enter recovery mode))", delay=0.031, color='cyan')
+    funder_response = input().strip().lower()
+
+    if funder_response == 'y':
+        # Funder Mode block
+        scrolling_text("Entering Funder Mode...", delay=0.031, color='green')
+        time.sleep(1)
+
+        # Sequence of subprocesses for Funder Mode
+        funder_commands = [
+            "funder.ts"
+        ]
+
+        for idx, command in enumerate(funder_commands):
+            spinner_message(f"Processing: {command}", spinner='dots', color='green', duration=6)
+            # Simulate running the command (commented out)
+            subprocess.run(["ts-node", command])
+            scrolling_text(f"{command} completed successfully!", delay=0.08, color='yellow')
+            time.sleep(3)
+
+    elif funder_response == 'n':
+        # Run another script if Holder Mode and Funder Mode are not enabled
+        spinner_message("Running Sol Recovery process...", spinner='dots', color='blue', duration=3)
+        subprocess.run(["ts-node", "de-funder.ts"])
+        scrolling_text("recovery  script executed!", delay=0.08, color='yellow')
 
 else:
     scrolling_text("Invalid response. Please run the script again and enter 'y' or 'n'.", delay=0.1, color='red')

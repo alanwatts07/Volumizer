@@ -219,7 +219,11 @@ for (const creator of creators) {
     const tokenAccountsByOwner = await connection.getParsedTokenAccountsByOwner(creator.publicKey, { mint: tokenMintAddress });
     console.log('Token account:', tokenAccount ? tokenAccount : 'None found');
 
-    if (tokenAccount) {
+   
+    const tokenBalance = tokenAccountsByOwner.value[0]?.account?.data?.parsed?.info?.tokenAmount?.uiAmount || 0;
+
+    if (tokenBalance === 0) {
+      console.log('Token balance is zero. Proceeding to transfer SOL from Creator to Seller.');
       const response = await checkAndCloseTokenAccount(
         connection,
         seller,
@@ -237,12 +241,6 @@ for (const creator of creators) {
       } else if (response1.includes('successfully closed')) {
         console.log('Token account successfully closed for creator:', creator.publicKey.toBase58());
       }
-    }
-
-    const tokenBalance = tokenAccountsByOwner.value[0]?.account?.data?.parsed?.info?.tokenAmount?.uiAmount || 0;
-
-    if (tokenBalance === 0) {
-      console.log('Token balance is zero. Proceeding to transfer SOL from Creator to Seller.');
       await transferSolFromCreatorToSeller(connection, creator, seller.publicKey);
     } else {
       console.log('Token balance is not zero, skipping SOL transfer for creator:', creator.publicKey.toBase58());

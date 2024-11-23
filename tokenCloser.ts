@@ -21,7 +21,7 @@ export async function checkAndCloseTokenAccount(
         // Fetch token account info
         const tokenAccountInfo = await connection.getParsedAccountInfo(tokenAccount);
         if (!tokenAccountInfo.value) {
-            return `Token account ${tokenAccount.toBase58()} does not exist.`;
+            return `Token account ${tokenAccount} does not exist.`;
         }
 
         // Check if the balance is zero
@@ -29,9 +29,12 @@ export async function checkAndCloseTokenAccount(
         const tokenAmount = accountData.parsed.info.tokenAmount.uiAmount;
 
         if (tokenAmount !== 0) {
-            return `Token account ${tokenAccount.toBase58()} has a non-zero balance of ${tokenAmount}. Cannot close.`;
-        }
+            return `Token account ${tokenAccount} has a non-zero balance of ${tokenAmount}. Cannot close.`;
+        } if(tokenAmount <= 1000){
+            console.log(tokenAmount)
+            console.log('negligible amount if nyou want to burn these')
 
+        }
         // Close the token account
         const signature = await closeAccount(
             connection,
@@ -41,7 +44,7 @@ export async function checkAndCloseTokenAccount(
             authority
         );
 
-        return `Token account ${tokenAccount.toBase58()} successfully closed. Transaction: ${signature}`;
+        return `Token account ${tokenAccount} successfully closed. Transaction: ${signature}`;
     } catch (error) {
         return `Error closing token account: ${error.message}`;
     }

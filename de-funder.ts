@@ -29,4 +29,4 @@ const executeSell = async (mintAddress) => {
         console.error(`${ANSI_COLORS.RED}Error during buyIx: ${error.message}${ANSI_COLORS.RESET}`);
     };
 };
-executeSell(mintAddress);
+executeSell(tokenMintAddress);

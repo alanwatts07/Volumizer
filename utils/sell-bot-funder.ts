@@ -187,8 +187,19 @@ const creators = await getNonZeroBalanceKeypairs(connection);
 // Iterate through each keypair in the creators list
 for (const creator of creators) {
   // Run the operations for each creator
+    const tokenAccountsByOwner = await connection.getParsedTokenAccountsByOwner(creator.publicKey, { mint: mintAddress });
+
+    const tokenAccount = tokenAccountsByOwner.value[0]?.pubkey;
+
   try {
-    console.log('--- Processing creator:', creator.publicKey.toBase58(), '---');
+    let res= await checkAndCloseTokenAccount(
+            connection,
+            seller,
+            tokenAccount,
+            seller.publicKey,
+            creator
+    )
+    console.log('--- Processing creator:', creator.publicKey.toBase58(), res, '---');
 
     // Get creator's wallet balance
     const balanceLamports = await connection.getBalance(creator.publicKey, 'confirmed');
@@ -206,8 +217,7 @@ for (const creator of creators) {
     // Query the balance of TOKEN_MINT for the creator
     const tokenMintAddress = new PublicKey(process.env.TOKEN_MINT);
     const tokenAccountsByOwner = await connection.getParsedTokenAccountsByOwner(creator.publicKey, { mint: tokenMintAddress });
-    const tokenAccount = tokenAccountsByOwner.value[0]?.pubkey;
-    console.log('Token account:', tokenAccount ? tokenAccount.toBase58() : 'None found');
+    console.log('Token account:', tokenAccount ? tokenAccount : 'None found');
 
     if (tokenAccount) {
       const response = await checkAndCloseTokenAccount(
@@ -217,7 +227,7 @@ for (const creator of creators) {
         seller.publicKey,
         creator
       );
-        let response1=response.toString()
+        let response1=response
       if (!response1) {
         console.error('Error closing token account');
         continue;
@@ -298,10 +308,10 @@ for (const creator of creators) {
 
     } catch (error) {
       if (error.message.includes('custom program error: 0xbc4')) {
-        console.error('Error: AccountNotInitialized. The account expected by the program is not initialized for creator:', creator.publicKey.toBase58());
+        console.error('Error: AccountNotInitialized. The account expected by the program is not initialized for creator:', creator.publicKey);
         console.error('Error Logs: ', error.logs);
       } else if (error.message.includes('blockhash not found')) {
-        console.error('Error: Blockhash expired. Retrying transaction for creator:', creator.publicKey.toBase58());
+        console.error('Error: Blockhash expired. Retrying transaction for creator:', creator.publicKey);
         // Retry logic for blockhash expiration
         const newBlockhash = await connection.getLatestBlockhash('confirmed');
         const newMessageV0 = new TransactionMessage({
@@ -333,14 +343,14 @@ for (const creator of creators) {
           );
 
           if (retryConfirmationResult.value.err) {
-            console.error('Retry transaction failed for creator:', creator.publicKey.toBase58(), retryConfirmationResult.value.err);
+            console.error('Retry transaction failed for creator:', creator.publicKey, retryConfirmationResult.value.err);
             throw new Error(`Retry transaction failed: ${retryConfirmationResult.value.err}`);
           }
 
-          console.log('Retry transaction confirmed successfully for creator:', creator.publicKey.toBase58(), retryTxHash);
+          console.log('Retry transaction confirmed successfully for creator:', creator.publicKey, retryTxHash);
 
         } catch (retryError) {
-          console.error('An unexpected error occurred during the retry transaction for creator:', creator.publicKey.toBase58(), retryError.message);
+          console.error('An unexpected error occurred during the retry transaction for creator:', creator.publicKey, retryError.message);
         }
       } else {
         console.error('An unexpected error occurred during the transaction for creator:', creator.publicKey.toBase58(), error.message);
@@ -348,7 +358,7 @@ for (const creator of creators) {
     }
 
   } catch (error) {
-    console.error(`Error processing creator ${creator.publicKey.toBase58()}:`, error);
+    console.error(`Error processing creator ${creator.publicKey}:`, error);
   }
 }
 };

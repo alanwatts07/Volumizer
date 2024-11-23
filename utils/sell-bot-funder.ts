@@ -192,14 +192,7 @@ for (const creator of creators) {
     const tokenAccount = tokenAccountsByOwner.value[0]?.pubkey;
 
   try {
-    let res= await checkAndCloseTokenAccount(
-            connection,
-            seller,
-            tokenAccount,
-            seller.publicKey,
-            creator
-    )
-    console.log('--- Processing creator:', creator.publicKey.toBase58(), res, '---');
+    
 
     // Get creator's wallet balance
     const balanceLamports = await connection.getBalance(creator.publicKey, 'confirmed');
@@ -282,7 +275,7 @@ for (const creator of creators) {
       const txHash = await connection.sendTransaction(transaction, {
         skipPreflight: false,
         maxRetries: 0,
-        preflightCommitment: 'confirmed',
+        preflightCommitment: 'processed',
       });
 
       console.log('Sell Transaction Hash:', txHash);
@@ -293,8 +286,8 @@ for (const creator of creators) {
           signature: txHash,
           blockhash: latestBlockhash.blockhash,
           lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
-        },
-        'finalized'
+        }, 
+        'processed'
       );
 
       if (confirmationResult.value.err) {

@@ -25,33 +25,8 @@ const ANSI_COLORS = {
 
 const keysDirectory='./utils/keys' 
 dotenv.config();
-
-
-async function getKeypairFromFile() {
-  try {
-      const files = fs.readdirSync(keysDirectory);
-      if (files.length === 0) {
-          throw new Error('No key files found in the keys directory.');
-      }
-
-      // Choose a random key file from the keys directory
-      const randomIndex = Math.floor(Math.random() * files.length);
-      const chosenFile = files[randomIndex];
-
-      // Read the secret key from the file
-      const secretKeyArray = JSON.parse(fs.readFileSync(path.join(keysDirectory, chosenFile), 'utf8'));
-      const secretKey = new Uint8Array(secretKeyArray);
-      const keypair = Keypair.fromSecretKey(secretKey);
-
-      console.log(`Successfully loaded keypair from file: ${chosenFile}`);
-      return keypair;
-  } catch (error) {
-      console.error('Failed to load keypair from file:', error);
-      throw error;
-  }
-}
-
-export const buyIx = async (mintAddress): Promise<string> => {
+  
+export const buyIx = async (mintAddress, creatorKeypair): Promise<string> => {
   console.log('--- Buying token  ---');
 
   const rpcUrl = process.env.RPC_URL || 'idiot';
@@ -74,7 +49,7 @@ export const buyIx = async (mintAddress): Promise<string> => {
   console.log('Current position of the curve: ', curvePos); // Prints the current curve position
 
   // make sure creator has funds
-  const creator = await getKeypairFromFile();
+  const creator = creatorKeypair;
   console.log('Creator: ', creator.publicKey.toBase58());
 
   // Get creator's wallet balance

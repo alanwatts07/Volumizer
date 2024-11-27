@@ -1,0 +1,21 @@
+{
+  "name": "buyboybuybot",
+  "version": "1.0.0",
+  "description": "The Buy Boy tech team has produced a pump fun buy bot. TYhis baby will blow your insides out. It is crazy and big billy buy bot is the best.",
+  "main": "index.js",
+  "scripts": {
+    "test": "index-test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Volumizer"
+  },
+  "keywords": [
+    "guiit"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "solana": "^2.8.0"
+  }
+}

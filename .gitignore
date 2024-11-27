@@ -2,3 +2,16 @@ node_modules/
 assets/
 .env
 package-lock.json
+utils/keys/
+
+jito-env/
+
+pumpFun/buyBoy/config.yaml
+pumpFun/buyBoy/key_twist.py
+pumpFun/buyBoy/lib64/
+pumpFun/buyBoy/lib/
+pumpFun/buyBoy/node_modules/
+pumpFun/buyBoy/package-lock.json
+pumpFun/buyBoy/pyvenv.cfg 
+pumpFun/buyBoy/bin/
+pumpFun/buyBoy/include/

@@ -11,7 +11,7 @@
 
 ------------------------
 
-### 'Modes'
+### *Modes*
 
 | Initial Mode|  Action       | 
 |-------------|---------------|
@@ -22,6 +22,7 @@
 - Style
     - cool style!
     - WOW
+    -**talks to you like the degenerate you are**
 
 ## Setup and Settings
 

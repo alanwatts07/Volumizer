@@ -64,7 +64,7 @@ print(Fore.GREEN + "═" * 50)
 print(Fore.MAGENTA + f"🔥 WALLET: {Fore.CYAN}{BOT_WALLET[:6]}...{BOT_WALLET[-4:]}")
 print(Fore.MAGENTA + f"🎯 TOKEN: {Fore.CYAN}{MINT_ADDRESS[:6]}...{MINT_ADDRESS[-4:]}")
 print(Fore.GREEN + "═" * 50 + "\n")
-print_fast(Fore.LIGHTBLACK_EX, '''Yo dawg, making that trade request...\nthis guy is slow as shit\nbut I got my peice wit me \nso watch this shit...\n(a scream is heard from inside)\nwhat kind of a person are you\n really dealing with hear?\nYou don't even have time to think because...\n
+print_fast(Fore.LIGHTBLACK_EX, '''Yo dawg, making that trade request...\nthis guy is slow as shit\nbut I got my peice wit me \nso watch this shit...\n(a scream is heard from inside)\nwhat kind of a person are you\n really dealing with here?\nYou don't even have time to think because...\n
            '''
            )
 loading_animation()

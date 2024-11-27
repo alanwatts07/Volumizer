@@ -1,9 +1,17 @@
 # Buy Boy Is Here
 
+![the buyBoy in action!][image.png]
+----------------------------
+
 ## Trading bot for Pump Fun
 
+----------------------
+
 ### Key Features
-- Modes
+
+------------------------
+
+### 'Modes'
 
 | Initial Mode|  Action       | 
 |-------------|---------------|
@@ -44,3 +52,5 @@ pip install -r requirements.txt
 python3 main.py
 ```
 **good luck fixing the errors haha**
+
+[image.png]: image.png

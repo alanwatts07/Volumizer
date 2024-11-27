@@ -4,6 +4,7 @@ assets/
 package-lock.json
 utils/keys/
 
+jito/
 jito-env/
 
 pumpFun/buyBoy/config.yaml
@@ -15,3 +16,4 @@ pumpFun/buyBoy/package-lock.json
 pumpFun/buyBoy/pyvenv.cfg 
 pumpFun/buyBoy/bin/
 pumpFun/buyBoy/include/
+pumpFun/buyBoy/bb-venv/

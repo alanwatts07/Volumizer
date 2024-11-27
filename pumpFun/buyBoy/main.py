@@ -26,6 +26,8 @@ if not os.path.exists(config_path):
     with open(config_path, "w") as file:
         file.write(default_config)  # Write an empty string or initial content
     print(f"yo I made you a config file go fill it out so we can actually get to work bro")
+    raise SystemExit("Stopping script because your dumb-ass needs to FILL OUT THE DAMN CONFIG.YAML")
+
 else:
     print(f"File '{config_path}' already exists. You must be smart buddy.")
 

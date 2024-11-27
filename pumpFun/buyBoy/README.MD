@@ -22,7 +22,7 @@
 - Style
     - cool style!
     - WOW
-    -**talks to you like the degenerate you are**
+    - *talks to you like the degenerate you are*
 
 ## Setup and Settings
 
@@ -43,15 +43,15 @@ loop:
   mins: 1
 ```
 
-**then run this**
+*then run this*
 ```bash
 pip install -r requirements.txt
 ```
-**then this**
+*then this*
 
 ```bash
 python3 main.py
 ```
-**good luck fixing the errors haha**
+*good luck fixing the errors haha*
 
 [image.png]: image.png

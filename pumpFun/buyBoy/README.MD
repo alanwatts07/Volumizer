@@ -15,9 +15,9 @@
 
 | Initial Mode|  Action       | 
 |-------------|---------------|
-|    buy      | #buys your amt|
-|   sell      | #sells all    |
-|  buySell    | #buys and then sells after interval |    
+|    buy      | buys your amt|
+|   sell      | sells all    |
+|  buySell    | buys and then sells after interval |    
 
 - Style
     - cool style!
